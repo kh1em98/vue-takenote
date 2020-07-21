@@ -27,18 +27,10 @@ mongoose.connect(process.env.MongoURI, {
 let routes = require('./api/routes');
 routes(app);
 
-app.use(function (req, res) {
-    res.status(404).send({
-        url: req.originalUrl + ' not found'
-    })
-})
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(__dirname + '/public'));
     app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
 }
-
-
 
 app.listen(port, () => {
     console.log('Server lang nghe tai 8080');
